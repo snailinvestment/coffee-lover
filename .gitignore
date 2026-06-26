@@ -1,0 +1,9 @@
+images/
+.workbuddy/
+scripts/
+start.bat
+README.md
+*.zip
+*.py
+*.json.new
+
