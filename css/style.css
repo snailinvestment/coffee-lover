@@ -503,7 +503,7 @@ ul, ol { list-style: none; }
   .nav-links.open { display: flex; position: absolute; top: 100%; left: 0; right: 0; background: var(--coffee-dark); padding: 8px 16px 16px; z-index: 100; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
   .nav-links.open a { color: #fff; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.15); font-size: 0.95rem; }
   .nav-toggle { display: none !important; }
-  .nav-brand-br { display: inline; }
+  .nav-brand-br { display: block; }
   .nav-search { margin-left: auto; }
   .navbar { padding: 8px 0; }
   
