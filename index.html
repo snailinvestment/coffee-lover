@@ -13,7 +13,7 @@
   <nav class="navbar" id="navbar">
     <div class="nav-inner">
       <a href="#" class="nav-brand" data-route="home">
-        <span class="nav-brand-icon">☕</span> 咖啡爱好者
+        <span class="nav-brand-icon">☕</span> 一豆一世界
       </a>
       <button class="nav-toggle" id="navToggle" aria-label="菜单">☰</button>
       <div class="nav-links" id="navLinks">
@@ -65,6 +65,26 @@
       &copy; 2026 咖啡爱好者 — 一豆一世界
     </div>
   </footer>
+
+  <!-- 移动端底部导航 -->
+  <nav class="mobile-tabs" id="mobileTabs">
+    <a href="#" data-route="home" class="mobile-tab active" onclick="navigate('home');return false">
+      <span class="mobile-tab-icon">🏠</span>
+      <span class="mobile-tab-label">首页</span>
+    </a>
+    <a href="#" data-route="category/beans" class="mobile-tab" onclick="navigate('category/beans');return false">
+      <span class="mobile-tab-icon">🫘</span>
+      <span class="mobile-tab-label">咖啡豆</span>
+    </a>
+    <a href="#" data-route="category/brewing" class="mobile-tab" onclick="navigate('category/brewing');return false">
+      <span class="mobile-tab-icon">🫗</span>
+      <span class="mobile-tab-label">冲泡</span>
+    </a>
+    <a href="#" data-route="category/tasting" class="mobile-tab" onclick="navigate('category/tasting');return false">
+      <span class="mobile-tab-icon">👃</span>
+      <span class="mobile-tab-label">品鉴</span>
+    </a>
+  </nav>
 
   <script src="data/articles_data.js" defer></script>
   <script src="js/app.js" defer></script>

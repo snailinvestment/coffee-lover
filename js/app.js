@@ -66,6 +66,7 @@ function handleRoute() {
   }
   
   updateNavActive();
+  updateMobileTabs();
   render();
   window.scrollTo(0, 0);
 }
@@ -128,6 +129,22 @@ function setupEventListeners() {
       link.addEventListener('click', () => navLinks.classList.remove('open'));
     });
   }
+  
+  // Sync mobile tab bar
+  updateMobileTabs();
+}
+
+function updateMobileTabs() {
+  const tabs = document.querySelectorAll('.mobile-tab');
+  tabs.forEach(tab => {
+    const route = tab.dataset.route;
+    if (route === 'home') {
+      tab.classList.toggle('active', state.currentRoute === 'home');
+    } else {
+      const catId = route.replace('category/', '');
+      tab.classList.toggle('active', state.currentRoute === 'category' && state.currentParams.categoryId === catId);
+    }
+  });
 }
 
 // ===== 渲染主入口 =====
@@ -152,9 +169,9 @@ function renderHome() {
   return `
     <section class="hero">
       <div class="container">
-        <img src="images/hero_banner.png" alt="咖啡爱好者" style="max-width:100%;height:auto;border-radius:var(--radius-lg);margin-bottom:var(--space-xl);" onerror="this.style.display='none'">
-        <h1 class="hero-title">探索咖啡的奇妙世界</h1>
-        <p class="hero-subtitle">从一粒种子到一杯好咖啡，我们陪你走过每一步。不管你是刚入门的新手，还是想精进的爱好者，这里都有你想要的内容。</p>
+        <img src="images/hero_banner.png" alt="一豆一世界" loading="eager" width="1280" height="660" style="max-width:100%;height:auto;border-radius:var(--radius-lg);margin-bottom:var(--space-xl);" onerror="this.style.display='none'">
+        <h1 class="hero-title">一豆一世界</h1>
+        <p class="hero-subtitle">每一颗咖啡豆，都藏着一个世界的故事。从埃塞俄比亚的原始森林到你的杯中，我们陪你一起发现。</p>
         
         <div class="entry-cards">
           <div class="entry-card" data-route="category/history" onclick="event.stopPropagation();navigate('category/history')">
