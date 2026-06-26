@@ -132,6 +132,30 @@ function setupEventListeners() {
   
   // Sync mobile tab bar
   updateMobileTabs();
+  
+  // Theme toggle
+  initTheme();
+}
+
+function initTheme() {
+  const saved = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (saved === 'dark' || (!saved && prefersDark)) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.getElementById('themeToggle').textContent = '☀️';
+  }
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      document.documentElement.removeAttribute('data-theme');
+      document.getElementById('themeToggle').textContent = '🌙';
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      document.getElementById('themeToggle').textContent = '☀️';
+      localStorage.setItem('theme', 'dark');
+    }
+  });
 }
 
 function updateMobileTabs() {
@@ -171,7 +195,7 @@ function renderHome() {
       <div class="container">
         <img src="images/hero_banner.png" alt="一豆一世界" loading="eager" width="1280" height="660" style="max-width:100%;height:auto;border-radius:var(--radius-lg);margin-bottom:var(--space-xl);" onerror="this.style.display='none'">
         <h1 class="hero-title">一豆一世界</h1>
-        <p class="hero-subtitle">每一颗咖啡豆，都藏着一个世界的故事。从埃塞俄比亚的原始森林到你的杯中，我们陪你一起发现。</p>
+        <p class="hero-subtitle">从一粒种子到一杯好咖啡，我们陪你走过每一步。不管你是刚入门的新手，还是想精进的爱好者，这里都有你想要的内容。</p>
         
         <div class="entry-cards">
           <div class="entry-card" data-route="category/history" onclick="event.stopPropagation();navigate('category/history')">

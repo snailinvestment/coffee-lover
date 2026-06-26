@@ -13,7 +13,8 @@
   <nav class="navbar" id="navbar">
     <div class="nav-inner">
       <a href="#" class="nav-brand" data-route="home">
-        <span class="nav-brand-icon">☕</span> 一豆一世界
+        <span class="nav-brand-icon">☕</span>
+        <span class="nav-brand-text">一豆<br>一世界</span>
       </a>
       <button class="nav-toggle" id="navToggle" aria-label="菜单">☰</button>
       <div class="nav-links" id="navLinks">
@@ -26,6 +27,7 @@
       <div class="nav-search" id="navSearch">
         <input type="text" id="searchInput" placeholder="搜索文章..." autocomplete="off">
         <button class="nav-search-btn" id="searchBtn">🔍</button>
+        <button class="theme-toggle" id="themeToggle" aria-label="切换主题" title="日间/夜间模式">🌙</button>
       </div>
     </div>
   </nav>
@@ -83,6 +85,10 @@
     <a href="#" data-route="category/tasting" class="mobile-tab" onclick="navigate('category/tasting');return false">
       <span class="mobile-tab-icon">👃</span>
       <span class="mobile-tab-label">品鉴</span>
+    </a>
+    <a href="#" data-route="category/tools" class="mobile-tab" onclick="navigate('category/tools');return false">
+      <span class="mobile-tab-icon">🔧</span>
+      <span class="mobile-tab-label">工具</span>
     </a>
   </nav>
 
