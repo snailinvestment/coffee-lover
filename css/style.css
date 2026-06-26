@@ -588,3 +588,24 @@ ul, ol { list-style: none; }
 .text-center { text-align: center; }
 .mt-lg { margin-top: var(--space-lg); }
 .mb-lg { margin-bottom: var(--space-lg); }
+
+/* ===== 加载骨架屏 ===== */
+.loading-skeleton { padding: 32px 16px; max-width: 1200px; margin: 0 auto; }
+.skeleton-hero {
+  height: 200px; background: linear-gradient(90deg, #e8ecf1 25%, #f0f3f6 50%, #e8ecf1 75%);
+  background-size: 200% 100%; animation: shimmer 1.5s infinite;
+  border-radius: 12px; margin-bottom: 24px;
+}
+.skeleton-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.skeleton-card {
+  height: 280px; background: linear-gradient(90deg, #e8ecf1 25%, #f0f3f6 50%, #e8ecf1 75%);
+  background-size: 200% 100%; animation: shimmer 1.5s infinite;
+  border-radius: 12px;
+}
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+@media (max-width: 768px) {
+  .skeleton-cards { grid-template-columns: 1fr; }
+  .skeleton-hero { height: 140px; }
+  .skeleton-card { height: 200px; }
+}

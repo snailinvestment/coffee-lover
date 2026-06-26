@@ -23,20 +23,25 @@ const categoryConfig = {
 
 // ===== 初始化 =====
 async function init() {
+  // Use embedded data first for instant render, then try fetch for updates
+  if (window.__ARTICLES__) {
+    state.articles = window.__ARTICLES__.articles || [];
+    state.categories = window.__ARTICLES__.categories || [];
+  }
+  
+  // Try to load live data in background with a timeout
   try {
-    const res = await fetch('data/articles.json');
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 2000);
+    const res = await fetch('data/articles.json', { signal: controller.signal });
+    clearTimeout(timeout);
     const data = await res.json();
-    state.articles = data.articles || [];
-    state.categories = data.categories || [];
-  } catch (e) {
-    console.warn('Fetch failed, using embedded data:', e.message);
-    if (window.__ARTICLES__) {
-      state.articles = window.__ARTICLES__.articles || [];
-      state.categories = window.__ARTICLES__.categories || [];
-    } else {
-      console.error('No data available');
-      state.articles = [];
+    if (data.articles?.length) {
+      state.articles = data.articles;
+      state.categories = data.categories || [];
     }
+  } catch (e) {
+    // Silently use embedded data
   }
   
   setupEventListeners();
