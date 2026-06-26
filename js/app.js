@@ -194,7 +194,7 @@ function renderHome() {
     <section class="hero">
       <div class="container">
         <img src="images/hero_banner.png" alt="一豆一世界" loading="eager" width="1280" height="660" style="max-width:100%;height:auto;border-radius:var(--radius-lg);margin-bottom:var(--space-xl);" onerror="this.style.display='none'">
-        <h1 class="hero-title">一豆一世界</h1>
+        <h1 class="hero-title">探索咖啡的奇妙世界</h1>
         <p class="hero-subtitle">从一粒种子到一杯好咖啡，我们陪你走过每一步。不管你是刚入门的新手，还是想精进的爱好者，这里都有你想要的内容。</p>
         
         <div class="entry-cards">
