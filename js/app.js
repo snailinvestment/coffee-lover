@@ -233,13 +233,28 @@ function renderHome() {
       
       <div class="section-header">
         <h2 class="section-title">新手入门推荐</h2>
+        <span class="section-more" data-route="category/history" onclick="navigate('category/history')">查看全部 →</span>
       </div>
       <div class="article-grid">
         ${beginnerArticles.map(a => renderArticleCard(a)).join('')}
       </div>
       
+      ${(() => {
+        const originArticles = state.articles.filter(a => a.id.includes('origin') && a.id !== 'beans-origins').slice(0, 6);
+        return originArticles.length > 0 ? `
+        <div class="section-header">
+          <h2 class="section-title">🌍 探索咖啡产区</h2>
+          <span class="section-more" data-route="category/beans" onclick="navigate('category/beans')">全部产区 →</span>
+        </div>
+        <div class="article-grid">
+          ${originArticles.map(a => renderArticleCard(a)).join('')}
+        </div>
+        ` : '';
+      })()}
+      
       <div class="section-header">
         <h2 class="section-title">热门冲泡教程</h2>
+        <span class="section-more" data-route="category/brewing" onclick="navigate('category/brewing')">查看全部 →</span>
       </div>
       <div class="article-grid">
         ${brewingArticles.map(a => renderArticleCard(a)).join('')}
@@ -275,10 +290,14 @@ function renderCategory(categoryId) {
         <p style="color: var(--text-secondary); margin-top: 8px;">${config.desc}</p>
       </div>
       
-      ${categoryId === 'beans' ? renderOriginMap() : ''}
+      ${categoryId === 'beans' ? `
+        ${renderOriginMap()}
+        ${renderBeansSubNav()}
+      ` : ''}
       
       <div class="page-layout">
         <div>
+          ${categoryId === 'beans' ? renderBeansSubSections(categoryArticles) : `
           <div class="section-header">
             <h2 class="section-title">全部文章</h2>
             <span style="font-size:0.85rem;color:var(--text-tertiary);">共 ${categoryArticles.length} 篇</span>
@@ -286,7 +305,7 @@ function renderCategory(categoryId) {
           ${categoryArticles.length > 0 
             ? `<div class="article-grid">${categoryArticles.map(a => renderArticleCard(a)).join('')}</div>`
             : '<p class="no-results">📝 该分类暂无文章，敬请期待</p>'
-          }
+          }`}
           ${renderAdSlot('inline')}
         </div>
         <aside>
@@ -471,6 +490,48 @@ function renderAdSlot(type) {
       <p>Google AdSense / 品牌直投</p>
     </div>
   `;
+}
+
+// ===== 咖啡豆分类子导航 =====
+function renderBeansSubNav() {
+  return `
+    <div class="beans-subnav" style="display:flex;gap:12px;justify-content:center;margin-bottom:24px;flex-wrap:wrap;">
+      <a href="#beans-origins" class="subnav-item" style="background:var(--coffee-brown);color:#fff;padding:10px 24px;border-radius:var(--radius-xl);text-decoration:none;font-weight:600;font-size:0.92rem;transition:all 0.3s;" onmouseover="this.style.background='var(--coffee-dark)'" onmouseout="this.style.background='var(--coffee-brown)'">🌍 咖啡产区</a>
+      <a href="#beans-varieties" class="subnav-item" style="background:var(--bg-white);color:var(--coffee-brown);padding:10px 24px;border-radius:var(--radius-xl);text-decoration:none;font-weight:600;font-size:0.92rem;border:1.5px solid var(--coffee-brown);transition:all 0.3s;" onmouseover="this.style.background='var(--coffee-cream)'" onmouseout="this.style.background='var(--bg-white)'">🧬 品种与处理法</a>
+    </div>
+  `;
+}
+
+// ===== 咖啡豆分类子区域 =====
+function renderBeansSubSections(categoryArticles) {
+  // 产区文章：id 中包含 origin
+  const originArticles = categoryArticles.filter(a => a.id.includes('origin'));
+  // 品种/处理法文章
+  const varietyArticles = categoryArticles.filter(a => !a.id.includes('origin'));
+  
+  const originSection = originArticles.length > 0 ? `
+    <div id="beans-origins" style="margin-bottom:40px;">
+      <div class="section-header">
+        <h2 class="section-title">🌍 全球咖啡产区</h2>
+        <span style="font-size:0.85rem;color:var(--text-tertiary);">共 ${originArticles.length} 篇</span>
+      </div>
+      <p style="color:var(--text-secondary);font-size:0.9rem;margin-bottom:20px;">从非洲到南美，从中美洲到亚洲，风土如何塑造杯中风味 — 点击产区地图或下方文章探索</p>
+      <div class="article-grid">${originArticles.map(a => renderArticleCard(a)).join('')}</div>
+    </div>
+  ` : '';
+  
+  const varietySection = varietyArticles.length > 0 ? `
+    <div id="beans-varieties" style="margin-bottom:40px;">
+      <div class="section-header">
+        <h2 class="section-title">🧬 品种百科与处理法</h2>
+        <span style="font-size:0.85rem;color:var(--text-tertiary);">共 ${varietyArticles.length} 篇</span>
+      </div>
+      <p style="color:var(--text-secondary);font-size:0.9rem;margin-bottom:20px;">读懂咖啡品种谱系和处理方式，才能真正理解杯中风味的来源</p>
+      <div class="article-grid">${varietyArticles.map(a => renderArticleCard(a)).join('')}</div>
+    </div>
+  ` : '';
+  
+  return originSection + varietySection;
 }
 
 // ===== 侧边栏 =====
