@@ -52,6 +52,16 @@ async function init() {
 // ===== 路由系统 =====
 function handleRoute() {
   const hash = window.location.hash.slice(1) || 'home';
+  
+  // 纯锚点链接（无 /），直接滚动到页面内对应元素，不触发路由渲染
+  if (hash && !hash.includes('/') && hash !== 'home') {
+    const el = document.getElementById(hash);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+  }
+  
   const parts = hash.split('/');
   
   state.currentRoute = parts[0];
