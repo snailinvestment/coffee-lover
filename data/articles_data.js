@@ -960,7 +960,7 @@ window.__ARTICLES__ = {
     {
       "id": "culture-coffee-health",
       "title": "咖啡到底健不健康？一份基于科学研究的诚实回答",
-      "category": "culture",
+      "category": "tools",
       "level": "beginner",
       "date": "2026-06-28",
       "author": "一豆一世界",
