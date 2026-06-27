@@ -726,6 +726,8 @@ ul, ol { list-style: none; }
   
   /* SVG地图容器 */
   .map-container svg { width: 100%; height: auto; }
+  #coffee-origin-map { min-height: auto !important; padding: 8px !important; }
+  #coffee-origin-map svg { width: 100%; height: auto; }
   
   /* 酿造推荐器 */
   .interactive-quiz { padding: 20px 16px; }
