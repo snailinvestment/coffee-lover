@@ -196,7 +196,6 @@ function render() {
   // 文章渲染后包裹表格防止移动端溢出
   wrapTablesForMobile();
 }
-}
 
 // ===== 首页 =====
 function renderHome() {
