@@ -1,6 +1,6 @@
 // Supabase 配置 - 咖啡网站用户系统
 const SUPABASE_URL = 'https://iyqmfjmmachxukvgcdab.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml5cW1mam1tYWNodXh1a3ZnY2RhYiIsInJvbGUiOiJhbm9uIiwiaWF0IjoxNjk5NjgyNDAwLCJleHAiOjIwMTUyNTg0MDB9.X7g-EXAMPLE';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml5cW1mam1tYWNoeHVrdmdjZGFiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI1MTM2NDUsImV4cCI6MjA5ODA4OTY0NX0.vnIJP8VIEXgDE21jIbxjOJpRkp11j46gYz9UFaxy9-c';
 
 // 用户状态
 let supabaseClient = null;
