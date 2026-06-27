@@ -536,9 +536,9 @@ function renderBeansSubSections(categoryArticles) {
   const varietyArticles = categoryArticles.filter(a => !a.id.includes('origin'));
   
   // Group origin articles by continent
-  const africa = originArticles.filter(a => /ethiopia|kenya/.test(a.id));
+  const africa = originArticles.filter(a => /ethiopia|kenya|uganda/.test(a.id));
   const latam = originArticles.filter(a => /brazil|colombia|costa-rica|honduras|panama/.test(a.id));
-  const asia = originArticles.filter(a => /indonesia|vietnam|yunnan/.test(a.id));
+  const asia = originArticles.filter(a => /indonesia|vietnam|yunnan|india/.test(a.id));
   
   function renderContinentGroup(emoji, name, articles) {
     if (articles.length === 0) return '';
