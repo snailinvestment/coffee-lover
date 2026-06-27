@@ -503,8 +503,9 @@ ul, ol { list-style: none; }
   .nav-links.open { display: flex; position: absolute; top: 100%; left: 0; right: 0; background: var(--coffee-dark); padding: 8px 16px 16px; z-index: 100; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
   .nav-links.open a { color: #fff; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.15); font-size: 0.95rem; }
   .nav-toggle { display: none !important; }
-  .nav-brand-br { display: block; }
-  .nav-search { margin-left: auto; }
+  .nav-brand { font-size: 1rem; white-space: nowrap; }
+  .nav-brand-icon { font-size: 1.3rem; }
+  .nav-search { margin-left: 4px; padding: 4px 8px; gap: 2px; }
   .navbar { padding: 8px 0; }
   
   /* 首页英雄区 */
@@ -572,8 +573,9 @@ ul, ol { list-style: none; }
   .ad-placeholder { padding: 16px; font-size: 0.8rem; }
   
   /* 搜索 */
-  #searchInput { width: 120px; font-size: 0.85rem; padding: 6px 10px; }
-  .nav-search-btn { padding: 6px 8px; }
+  #searchInput { width: 100px; font-size: 0.8rem; padding: 5px 8px; }
+  .nav-search-btn { padding: 4px 6px; font-size: 0.9rem; }
+  .theme-toggle { font-size: 1rem; padding: 2px; margin-left: 2px; }
   
   /* 产品推荐 */
   .product-recommend { grid-template-columns: 1fr; }
