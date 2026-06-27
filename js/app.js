@@ -589,7 +589,10 @@ function renderSidebarSection(categoryId, categoryArticles, excludeId) {
 function renderOriginMap() {
   return `
     <div style="background:var(--bg-white);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:24px;margin:24px 0;text-align:center;">
-      <img src="images/coffee_origin_map.png" alt="全球咖啡产区" style="max-width:100%;height:auto;border-radius:var(--radius-md);margin-bottom:16px;" onerror="this.style.display='none'">
+      <div class="map-scroll-container">
+        <span class="map-scroll-hint">↔ 可左右滑动查看完整地图</span>
+        <img src="images/coffee_origin_map.png" alt="全球咖啡产区" style="min-width:700px;max-width:100%;height:auto;border-radius:var(--radius-md);margin-bottom:16px;" onerror="this.style.display='none'">
+      </div>
       <h2 style="margin-bottom:8px;color:var(--brand-navy);">全球咖啡产区</h2>
       <p style="color:var(--text-secondary);margin-bottom:20px;font-size:0.95rem;">点击国家查看产区详情 | 红色标记 = 本站已有深度介绍</p>
       <div id="coffee-origin-map" style="background:linear-gradient(180deg,#E3F2FD 0%,#E8F5E9 60%,#FFF3E0 100%);border-radius:var(--radius-md);padding:20px;position:relative;overflow:hidden;min-height:420px;">
