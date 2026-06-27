@@ -409,11 +409,25 @@ ul, ol { list-style: none; }
   overflow-wrap: anywhere;
 }
 
-/* 防止移动端文字溢出 */
-.article-content * {
-  max-width: 100% !important;
+/* 防止移动端文字溢出（不破坏表格布局） */
+.article-content p,
+.article-content h2,
+.article-content h3,
+.article-content h4,
+.article-content li,
+.article-content blockquote,
+.article-content strong,
+.article-content em,
+.article-content code,
+.article-content span,
+.article-content div {
+  max-width: 100%;
   word-break: break-word;
   overflow-wrap: anywhere;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  -webkit-hyphens: auto;
+  hyphens: auto;
 }
 
 .article-content h2 {
@@ -577,10 +591,21 @@ ul, ol { list-style: none; }
 /* 文章内容区所有裸写 table 统一加横向滚动保护 */
 .article-content table {
   display: block;
+  width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   max-width: 100%;
   border-collapse: collapse;
+}
+.article-content table thead,
+.article-content table tbody,
+.article-content table tr,
+.article-content table th,
+.article-content table td {
+  word-break: normal;
+  overflow-wrap: normal;
+  white-space: normal;
+  max-width: none;
 }
 .comparison-table th {
   background: var(--coffee-cream); padding: 12px 16px;
