@@ -509,14 +509,33 @@ function renderBeansSubSections(categoryArticles) {
   // 品种/处理法文章
   const varietyArticles = categoryArticles.filter(a => !a.id.includes('origin'));
   
+  // Group origin articles by continent
+  const africa = originArticles.filter(a => /ethiopia|kenya/.test(a.id));
+  const latam = originArticles.filter(a => /brazil|colombia|costa-rica|honduras|panama/.test(a.id));
+  const asia = originArticles.filter(a => /indonesia|vietnam|yunnan/.test(a.id));
+  
+  function renderContinentGroup(emoji, name, articles) {
+    if (articles.length === 0) return '';
+    return `
+      <div style="margin-bottom:32px;">
+        <h3 style="font-size:1.1rem;color:var(--coffee-brown);margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--coffee-cream);">
+          ${emoji} ${name} <span style="font-size:0.85rem;color:var(--text-tertiary);font-weight:400;">· ${articles.length} 篇</span>
+        </h3>
+        <div class="article-grid">${articles.map(a => renderArticleCard(a)).join('')}</div>
+      </div>
+    `;
+  }
+  
   const originSection = originArticles.length > 0 ? `
     <div id="beans-origins" style="margin-bottom:40px;">
       <div class="section-header">
         <h2 class="section-title">🌍 全球咖啡产区</h2>
         <span style="font-size:0.85rem;color:var(--text-tertiary);">共 ${originArticles.length} 篇</span>
       </div>
-      <p style="color:var(--text-secondary);font-size:0.9rem;margin-bottom:20px;">从非洲到南美，从中美洲到亚洲，风土如何塑造杯中风味 — 点击产区地图或下方文章探索</p>
-      <div class="article-grid">${originArticles.map(a => renderArticleCard(a)).join('')}</div>
+      <p style="color:var(--text-secondary);font-size:0.9rem;margin-bottom:20px;">从非洲到拉美，从东南亚到中国云南，风土如何塑造杯中风味 — 点击产区地图或下方文章探索</p>
+      ${renderContinentGroup('🇪🇹', '非洲产区', africa)}
+      ${renderContinentGroup('🌎', '拉丁美洲产区', latam)}
+      ${renderContinentGroup('🌏', '亚洲产区', asia)}
     </div>
   ` : '';
   
@@ -589,11 +608,11 @@ function renderOriginMap() {
           <circle cx="330" cy="260" r="10" fill="#2E7D32" stroke="#fff" stroke-width="1.5" style="cursor:pointer" onclick="navigate('article/beans-origin-brazil')"/>
           <text x="355" y="263" text-anchor="start" font-size="9" font-weight="600" fill="#1B3A5C">巴西</text>
 
-          <circle cx="380" cy="160" r="8" fill="#2E7D32" stroke="#fff" stroke-width="1.5"/>
-          <text x="395" y="155" text-anchor="start" font-size="8" fill="#555">哥斯达黎加</text>
+          <circle cx="380" cy="160" r="8" fill="#C62828" stroke="#fff" stroke-width="1.5" style="cursor:pointer" onclick="navigate('article/beans-origin-costa-rica')"/>
+          <text x="395" y="155" text-anchor="start" font-size="9" font-weight="600" fill="#1B3A5C">哥斯达黎加</text>
 
-          <circle cx="375" cy="175" r="6" fill="#2E7D32" stroke="#fff" stroke-width="1"/>
-          <text x="385" y="178" text-anchor="start" font-size="8" fill="#555">危地马拉</text>
+          <circle cx="380" cy="175" r="6" fill="#C62828" stroke="#fff" stroke-width="1" style="cursor:pointer" onclick="navigate('article/beans-origin-honduras')"/>
+          <text x="390" y="178" text-anchor="start" font-size="8" fill="#1B3A5C">洪都拉斯</text>
 
           <circle cx="530" cy="150" r="14" fill="#C62828" stroke="#fff" stroke-width="1.5" style="cursor:pointer" onclick="navigate('article/beans-origin-ethiopia')"/>
           <text x="530" y="136" text-anchor="middle" font-size="9" font-weight="600" fill="#1B3A5C">埃塞俄比亚</text>
@@ -613,8 +632,8 @@ function renderOriginMap() {
           <circle cx="675" cy="175" r="9" fill="#2E7D32" stroke="#fff" stroke-width="1.5" style="cursor:pointer" onclick="navigate('article/beans-origin-yunnan')"/>
           <text x="675" y="165" text-anchor="middle" font-size="9" font-weight="600" fill="#1B3A5C">中国云南</text>
 
-          <circle cx="710" cy="200" r="7" fill="#2E7D32" stroke="#fff" stroke-width="1"/>
-          <text x="720" y="203" text-anchor="start" font-size="8" fill="#555">越南</text>
+          <circle cx="710" cy="200" r="7" fill="#C62828" stroke="#fff" stroke-width="1" style="cursor:pointer" onclick="navigate('article/beans-origin-vietnam')"/>
+          <text x="720" y="203" text-anchor="start" font-size="9" font-weight="600" fill="#1B3A5C">越南</text>
 
           <circle cx="655" cy="170" r="5" fill="#2E7D32" stroke="#fff" stroke-width="1"/>
           <text x="663" y="166" text-anchor="start" font-size="7" fill="#555">印度</text>
