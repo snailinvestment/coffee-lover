@@ -537,7 +537,7 @@ function renderBeansSubSections(categoryArticles) {
   
   // Group origin articles by continent
   const africa = originArticles.filter(a => /ethiopia|kenya|uganda/.test(a.id));
-  const latam = originArticles.filter(a => /brazil|colombia|costa-rica|honduras|panama/.test(a.id));
+  const latam = originArticles.filter(a => /brazil|colombia|costa-rica|honduras|panama|jamaica/.test(a.id));
   const asia = originArticles.filter(a => /indonesia|vietnam|yunnan|india/.test(a.id));
   
   function renderContinentGroup(emoji, name, articles) {
