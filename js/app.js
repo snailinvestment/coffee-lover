@@ -192,6 +192,10 @@ function render() {
     case 'search': app.innerHTML = renderSearch(state.currentParams.query); break;
     default: app.innerHTML = renderHome();
   }
+  
+  // 文章渲染后包裹表格防止移动端溢出
+  wrapTablesForMobile();
+}
 }
 
 // ===== 首页 =====
@@ -444,6 +448,19 @@ function renderSearch(query) {
       </script>
     </section>
   `;
+}
+
+// ===== 表格移动端保护 =====
+function wrapTablesForMobile() {
+  document.querySelectorAll('.article-content table').forEach(table => {
+    // 跳过已包裹的
+    if (table.parentElement.classList.contains('table-scroll-wrapper')) return;
+    const wrapper = document.createElement('div');
+    wrapper.className = 'table-scroll-wrapper';
+    wrapper.style.cssText = 'width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:16px 0;';
+    table.parentNode.insertBefore(wrapper, table);
+    wrapper.appendChild(table);
+  });
 }
 
 // ===== 文章卡片组件 =====
