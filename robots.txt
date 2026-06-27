@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://snailinvestment.github.io/coffee-lover/sitemap.xml
