@@ -327,6 +327,7 @@ function renderArticle(articleId) {
             <span>·</span>
             <span>${article.author}</span>
             ${article.level ? `<span>·</span><span class="article-card-level ${article.level}">${getLevelLabel(article.level)}</span>` : ''}
+            <button class="fav-btn favorited-lg" data-favorite="${article.id}" onclick="event.stopPropagation();toggleFavorite('${article.id}')" title="收藏">🤍 收藏</button>
           </div>
         </div>
         
@@ -433,6 +434,7 @@ function renderArticleCard(article) {
         <div class="article-card-footer">
           <span>${article.date}</span>
           ${article.level ? `<span class="article-card-level ${article.level}">${getLevelLabel(article.level)}</span>` : ''}
+          <button class="fav-btn" data-favorite="${article.id}" onclick="event.stopPropagation();toggleFavorite('${article.id}')" title="收藏">🤍</button>
         </div>
       </div>
     </article>
