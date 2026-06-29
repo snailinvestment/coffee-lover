@@ -537,7 +537,7 @@ function renderBeansSubSections(categoryArticles) {
   
   // Group origin articles by continent
   const africa = originArticles.filter(a => /ethiopia|kenya|uganda|tanzania|rwanda/.test(a.id));
-  const latam = originArticles.filter(a => /brazil|colombia|costa-rica|honduras|panama|jamaica|peru/.test(a.id));
+  const latam = originArticles.filter(a => /brazil|colombia|costa-rica|honduras|panama|jamaica|peru|venezuela/.test(a.id));
   const asia = originArticles.filter(a => /indonesia|vietnam|yunnan|india|taiwan/.test(a.id));
   
   function renderContinentGroup(emoji, name, articles) {
@@ -633,6 +633,9 @@ function renderOriginMap() {
 
           <circle cx="290" cy="200" r="12" fill="#C62828" stroke="#fff" stroke-width="1.5" style="cursor:pointer" onclick="navigate('article/beans-origin-colombia')"/>
           <text x="290" y="218" text-anchor="middle" font-size="9" font-weight="600" fill="#1B3A5C">哥伦比亚</text>
+
+          <circle cx="320" cy="178" r="6" fill="#C62828" stroke="#fff" stroke-width="1" style="cursor:pointer" onclick="navigate('article/beans-origin-venezuela')"/>
+          <text x="330" y="181" text-anchor="start" font-size="8" font-weight="600" fill="#1B3A5C">委内瑞拉</text>
 
           <circle cx="300" cy="260" r="7" fill="#C62828" stroke="#fff" stroke-width="1" style="cursor:pointer" onclick="navigate('article/beans-origin-peru')"/>
           <text x="315" y="263" text-anchor="start" font-size="8" fill="#1B3A5C">秘鲁</text>
