@@ -536,9 +536,9 @@ function renderBeansSubSections(categoryArticles) {
   const varietyArticles = categoryArticles.filter(a => !a.id.includes('origin'));
   
   // Group origin articles by continent
-  const africa = originArticles.filter(a => /ethiopia|kenya|uganda/.test(a.id));
-  const latam = originArticles.filter(a => /brazil|colombia|costa-rica|honduras|panama|jamaica/.test(a.id));
-  const asia = originArticles.filter(a => /indonesia|vietnam|yunnan|india/.test(a.id));
+  const africa = originArticles.filter(a => /ethiopia|kenya|uganda|tanzania|rwanda/.test(a.id));
+  const latam = originArticles.filter(a => /brazil|colombia|costa-rica|honduras|panama|jamaica|peru/.test(a.id));
+  const asia = originArticles.filter(a => /indonesia|vietnam|yunnan|india|taiwan/.test(a.id));
   
   function renderContinentGroup(emoji, name, articles) {
     if (articles.length === 0) return '';
@@ -634,6 +634,9 @@ function renderOriginMap() {
           <circle cx="290" cy="200" r="12" fill="#C62828" stroke="#fff" stroke-width="1.5" style="cursor:pointer" onclick="navigate('article/beans-origin-colombia')"/>
           <text x="290" y="218" text-anchor="middle" font-size="9" font-weight="600" fill="#1B3A5C">哥伦比亚</text>
 
+          <circle cx="300" cy="260" r="7" fill="#C62828" stroke="#fff" stroke-width="1" style="cursor:pointer" onclick="navigate('article/beans-origin-peru')"/>
+          <text x="315" y="263" text-anchor="start" font-size="8" fill="#1B3A5C">秘鲁</text>
+
           <circle cx="330" cy="260" r="10" fill="#2E7D32" stroke="#fff" stroke-width="1.5" style="cursor:pointer" onclick="navigate('article/beans-origin-brazil')"/>
           <text x="355" y="263" text-anchor="start" font-size="9" font-weight="600" fill="#1B3A5C">巴西</text>
 
@@ -649,17 +652,20 @@ function renderOriginMap() {
           <circle cx="545" cy="180" r="10" fill="#C62828" stroke="#fff" stroke-width="1.5" style="cursor:pointer" onclick="navigate('article/beans-origin-kenya')"/>
           <text x="545" y="168" text-anchor="middle" font-size="9" font-weight="600" fill="#1B3A5C">肯尼亚</text>
 
-          <circle cx="520" cy="220" r="7" fill="#2E7D32" stroke="#fff" stroke-width="1"/>
-          <text x="532" y="223" text-anchor="start" font-size="8" fill="#555">坦桑尼亚</text>
+          <circle cx="520" cy="220" r="8" fill="#C62828" stroke="#fff" stroke-width="1.5" style="cursor:pointer" onclick="navigate('article/beans-origin-tanzania')"/>
+          <text x="532" y="223" text-anchor="start" font-size="8" font-weight="600" fill="#1B3A5C">坦桑尼亚</text>
 
-          <circle cx="500" cy="260" r="7" fill="#2E7D32" stroke="#fff" stroke-width="1"/>
-          <text x="510" y="264" text-anchor="start" font-size="8" fill="#555">卢旺达</text>
+          <circle cx="500" cy="260" r="7" fill="#C62828" stroke="#fff" stroke-width="1" style="cursor:pointer" onclick="navigate('article/beans-origin-rwanda')"/>
+          <text x="510" y="264" text-anchor="start" font-size="8" font-weight="600" fill="#1B3A5C">卢旺达</text>
 
           <circle cx="640" cy="200" r="12" fill="#C62828" stroke="#fff" stroke-width="1.5" style="cursor:pointer" onclick="navigate('article/beans-origin-indonesia')"/>
           <text x="640" y="186" text-anchor="middle" font-size="9" font-weight="600" fill="#1B3A5C">印尼</text>
 
           <circle cx="675" cy="175" r="9" fill="#2E7D32" stroke="#fff" stroke-width="1.5" style="cursor:pointer" onclick="navigate('article/beans-origin-yunnan')"/>
           <text x="675" y="165" text-anchor="middle" font-size="9" font-weight="600" fill="#1B3A5C">中国云南</text>
+
+          <circle cx="710" cy="148" r="7" fill="#C62828" stroke="#fff" stroke-width="1" style="cursor:pointer" onclick="navigate('article/beans-origin-taiwan')"/>
+          <text x="720" y="152" text-anchor="start" font-size="9" font-weight="600" fill="#1B3A5C">中国台湾</text>
 
           <circle cx="710" cy="200" r="7" fill="#C62828" stroke="#fff" stroke-width="1" style="cursor:pointer" onclick="navigate('article/beans-origin-vietnam')"/>
           <text x="720" y="203" text-anchor="start" font-size="9" font-weight="600" fill="#1B3A5C">越南</text>
