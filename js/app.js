@@ -190,11 +190,52 @@ function render() {
     case 'category': app.innerHTML = renderCategory(state.currentParams.categoryId); break;
     case 'article': app.innerHTML = renderArticle(state.currentParams.articleId); break;
     case 'search': app.innerHTML = renderSearch(state.currentParams.query); break;
+    case 'favorites': app.innerHTML = renderFavorites(); break;
     default: app.innerHTML = renderHome();
   }
   
   // 文章渲染后包裹表格防止移动端溢出
   wrapTablesForMobile();
+  
+  // 登录后同步收藏按钮状态（supabase.js 注入，未加载时跳过）
+  if (typeof updateFavoriteUI === 'function') {
+    try { updateFavoriteUI(); } catch (e) { /* supabase 未就绪 */ }
+  }
+}
+
+// ===== 我的收藏页 =====
+function renderFavorites() {
+  // currentUser / userFavorites 由 js/supabase.js 提供（全局绑定）
+  if (typeof currentUser === 'undefined' || !currentUser) {
+    return `
+      <section class="container" style="padding-top:64px;text-align:center;">
+        <div style="font-size:3rem;margin-bottom:16px;">🔐</div>
+        <h2 style="color:var(--coffee-dark);margin-bottom:12px;">请先登录</h2>
+        <p class="no-results" style="margin-bottom:20px;">登录后即可查看你收藏的文章</p>
+        <button class="btn btn-primary" onclick="showLoginModal()">去登录 / 注册</button>
+      </section>
+    `;
+  }
+
+  const favs = state.articles.filter(a => userFavorites.has(a.id));
+  return `
+    <section class="container" style="padding-top:32px;">
+      <div class="breadcrumb">
+        <a href="#" data-route="home" onclick="navigate('home')">首页</a> › 
+        <span>我的收藏</span>
+      </div>
+      <div class="article-hero culture">
+        <div class="article-hero-icon">❤️</div>
+        <h1>我的收藏</h1>
+        <p style="color:var(--text-secondary);margin-top:8px;">共收藏 ${favs.length} 篇文章</p>
+      </div>
+      <div class="article-grid">
+        ${favs.length > 0
+          ? favs.map(a => renderArticleCard(a)).join('')
+          : '<p class="no-results">还没有收藏，去文章页点击 🤍 收藏你喜欢的文章吧</p>'}
+      </div>
+    </section>
+  `;
 }
 
 // ===== 首页 =====

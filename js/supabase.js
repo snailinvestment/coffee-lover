@@ -10,12 +10,13 @@ let userFavorites = new Set();
 // 初始化 Supabase（延迟加载，避免阻塞页面）
 async function initSupabase() {
   if (supabaseClient) return supabaseClient;
-  
-  // 动态加载 Supabase JS 客户端
+
+  // 等待 SDK 加载完成（通过 index.html 中的本地 script 标签引入）
   if (!window.supabase) {
-    await loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js');
+    console.error('Supabase SDK 未加载，请检查 js/supabase.min.js 是否正确引入');
+    return null;
   }
-  
+
   supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   
   // 检查当前会话
@@ -113,7 +114,11 @@ function updateFavoriteButton(articleId) {
   const btn = document.querySelector(`[data-favorite="${articleId}"]`);
   if (btn) {
     const isFav = userFavorites.has(articleId);
-    btn.innerHTML = isFav ? '❤️' : '🤍';
+    if (btn.classList.contains('favorited-lg')) {
+      btn.innerHTML = isFav ? '❤️ 已收藏' : '🤍 收藏';
+    } else {
+      btn.innerHTML = isFav ? '❤️' : '🤍';
+    }
     btn.classList.toggle('favorited', isFav);
   }
 }
@@ -216,12 +221,6 @@ async function handleLogout() {
 
 // 显示收藏列表
 async function showFavorites() {
-  if (!currentUser || userFavorites.size === 0) {
-    alert('暂无收藏文章');
-    return;
-  }
-  
-  const favArticles = state.articles.filter(a => userFavorites.has(a.id));
   navigate('favorites');
 }
 
