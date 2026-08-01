@@ -17,7 +17,9 @@ async function initSupabase() {
     return null;
   }
 
+  console.log('[Supabase] 初始化中，项目 URL:', SUPABASE_URL);
   supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  console.log('[Supabase] 客户端已创建');
   
   // 检查当前会话
   const { data: { session } } = await supabaseClient.auth.getSession();
@@ -159,35 +161,55 @@ function closeModal() {
 
 // 处理登录
 async function handleLogin() {
+  const client = await initSupabase();
+  if (!client) {
+    alert('登录失败：Supabase 客户端未初始化，请刷新页面重试');
+    return;
+  }
+
   const email = document.getElementById('loginEmail').value;
   const password = document.getElementById('loginPassword').value;
-  
-  const { data, error } = await supabaseClient.auth.signInWithPassword({
-    email, password
-  });
-  
-  if (error) {
-    alert('登录失败：' + error.message);
-  } else {
-    closeModal();
-    updateAuthUI();
+
+  try {
+    const { data, error } = await client.auth.signInWithPassword({ email, password });
+
+    if (error) {
+      console.error('登录业务错误:', error);
+      alert('登录失败：' + error.message);
+    } else {
+      closeModal();
+      updateAuthUI();
+    }
+  } catch (err) {
+    console.error('登录网络/CORS错误:', err);
+    alert('登录失败：' + (err.message || '无法连接到登录服务器，请检查控制台网络报错'));
   }
 }
 
 // 处理注册
 async function handleSignup() {
+  const client = await initSupabase();
+  if (!client) {
+    alert('注册失败：Supabase 客户端未初始化，请刷新页面重试');
+    return;
+  }
+
   const email = document.getElementById('loginEmail').value;
   const password = document.getElementById('loginPassword').value;
-  
-  const { data, error } = await supabaseClient.auth.signUp({
-    email, password
-  });
-  
-  if (error) {
-    alert('注册失败：' + error.message);
-  } else {
-    alert('注册成功！请查收验证邮件');
-    closeModal();
+
+  try {
+    const { data, error } = await client.auth.signUp({ email, password });
+
+    if (error) {
+      console.error('注册业务错误:', error);
+      alert('注册失败：' + error.message);
+    } else {
+      alert('注册成功！请查收验证邮件');
+      closeModal();
+    }
+  } catch (err) {
+    console.error('注册网络/CORS错误:', err);
+    alert('注册失败：' + (err.message || '无法连接到注册服务器，请检查控制台网络报错'));
   }
 }
 
@@ -229,3 +251,25 @@ document.addEventListener('DOMContentLoaded', () => {
   // 延迟初始化，避免阻塞首屏
   setTimeout(initSupabase, 100);
 });
+
+// 诊断函数：可在浏览器控制台运行 window.testSupabaseConnection()
+window.testSupabaseConnection = async function() {
+  const client = await initSupabase();
+  if (!client) {
+    console.error('[Supabase 诊断] 客户端未初始化');
+    return;
+  }
+  console.log('[Supabase 诊断] 项目 URL:', SUPABASE_URL);
+  console.log('[Supabase 诊断] Anon key 前缀:', SUPABASE_ANON_KEY.slice(0, 20) + '...');
+
+  try {
+    const { data, error } = await client.auth.getSession();
+    if (error) {
+      console.error('[Supabase 诊断] getSession 失败:', error);
+    } else {
+      console.log('[Supabase 诊断] getSession 成功，当前会话:', data.session ? '已登录' : '未登录');
+    }
+  } catch (err) {
+    console.error('[Supabase 诊断] getSession 抛出异常:', err);
+  }
+};
